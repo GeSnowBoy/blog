@@ -1,0 +1,29 @@
+.blog-cell-main {
+  display: flex;
+
+  .blog-cell-title {
+    flex: 1;
+    overflow: hidden;
+  }
+  .blog-cell-img {
+    flex: none;
+    width: 240px;
+    max-height: 240px;
+    margin-left: 20px;
+  }
+}
+@media (max-width: 800px) {
+  .blog-cell-main {
+    flex-wrap: wrap;
+    .blog-cell-title {
+      flex: none;
+      width: 100%;
+    }
+    .blog-cell-img {
+      flex: none;
+      width: 100%;
+      max-height: none;
+      margin: 0px;
+    }
+  }
+}

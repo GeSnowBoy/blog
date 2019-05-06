@@ -8,8 +8,8 @@ export default easyReducer(
     }
   },
   {
-    owner: 'markedjs',
-    repo: 'marked'
+    owner: 'GeSnowBoy',
+    repo: 'blog'
   }
 );
 // markedjs/marked

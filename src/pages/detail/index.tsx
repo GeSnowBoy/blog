@@ -76,7 +76,9 @@ function DetailPage(props: P) {
         )}
         <Divider dashed />
         <div>
-          <Link to={`${parseInt(props.id) - 1}`}>上一篇</Link>
+          {parseInt(props.id) > 1 && (
+            <Link to={`${parseInt(props.id) - 1}`}>上一篇</Link>
+          )}
           <Link to={`${parseInt(props.id) + 1}`} style={{ float: 'right' }}>
             下一篇
           </Link>

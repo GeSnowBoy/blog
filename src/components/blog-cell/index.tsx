@@ -2,6 +2,7 @@ import * as React from 'react';
 import { IssuseType } from '../../model/issuse';
 import { Link } from 'react-router-dom';
 import { List, Icon } from 'antd';
+import './index.less';
 function getImgUrl(src) {
   if (/https?:\/\/.+\.(jpg|png|gif)/.test(src)) {
     return src.match(/https?:\/\/.+\.(jpg|png|gif)/)[0];
@@ -26,21 +27,26 @@ export default function BlogCell(props: IssuseType) {
         <IconText type="edit" text={props.body.length + '字'} />,
         <IconText type="message" text={props.comments} />
       ]}
-      extra={
-        imgUrl && <img width={272} style={{ marginLeft: 20 }} src={imgUrl} />
-      }
     >
-      <List.Item.Meta
-        title={
-          <Link to={`/detail/${props.number}`} target="_blank">
-            {props.title}
-            {!props.locked && (
-              <IconText type="fire" text="" style={{ marginLeft: 8 }} />
-            )}
-          </Link>
-        }
-        description={props.body.slice(0, 300) + '...'}
-      />
+      <div className="blog-cell-main">
+        <List.Item.Meta
+          className="blog-cell-title"
+          title={
+            <Link to={`/detail/${props.number}`} target="_blank">
+              {props.title}
+              {!props.locked && (
+                <IconText type="fire" text="" style={{ marginLeft: 8 }} />
+              )}
+            </Link>
+          }
+          description={props.body.slice(0, 300) + '...'}
+        />
+        {imgUrl && (
+          <div className="blog-cell-img">
+            <img src={imgUrl} />
+          </div>
+        )}
+      </div>
     </List.Item>
   );
 }
