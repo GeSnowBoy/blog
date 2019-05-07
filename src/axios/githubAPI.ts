@@ -18,6 +18,29 @@ const API = {
         getUrl('/repos/:owner/:repo/issues/:issue_number', number),
         config
       );
+    },
+    getDetail() {
+      return ajax.get(getUrl('/repos/:owner/:repo/milestones'));
+    }
+  },
+  label: {
+    getAll(config?: AxiosRequestConfig) {
+      return ajax.get(getUrl('/repos/:owner/:repo/labels'), config);
+    }
+  },
+  repository: {
+    get(config?: AxiosRequestConfig) {
+      return ajax.get(getUrl('/repos/:owner/:repo'), config);
+    }
+  },
+  comment: {
+    get(issueIds: string | number, config?: AxiosRequestConfig) {
+      return ajax.get(
+        getUrl('/repos/:owner/:repo/issues/:issue_number/comments', {
+          issue_number: issueIds
+        }),
+        config
+      );
     }
   }
 };

@@ -1,5 +1,6 @@
 import { easyReducer } from './blogList';
-
+import { parseQueryString } from '../tools';
+let query = parseQueryString(location.hash);
 export default easyReducer(
   'github',
   {
@@ -8,8 +9,8 @@ export default easyReducer(
     }
   },
   {
-    owner: 'GeSnowBoy',
-    repo: 'blog'
+    owner: query.owner || 'GeSnowBoy',
+    repo: query.blog || 'blog'
   }
 );
-// markedjs/marked
+// markedjs/marked  isaaxite/blog

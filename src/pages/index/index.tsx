@@ -3,10 +3,12 @@ import { connect } from 'react-redux';
 import { Pagination, List, BackTop, Row, Col, Affix, Divider, Tag } from 'antd';
 import BlogCell from '../../components/blog-cell';
 import API from '../../axios/githubAPI';
+import { LabelType } from '../../model/label';
 
 const mapStateToProps = state => {
   return {
-    blogList: state.blogList
+    blogList: state.blogList,
+    labels: state.labels
   };
 };
 
@@ -16,7 +18,8 @@ const mapDispatchToProps = dispatch => {
       API.issuse
         .getAll({
           params: {
-            state: 'all'
+            state: 'all',
+            per_page: 100000
           }
         })
 
@@ -26,6 +29,14 @@ const mapDispatchToProps = dispatch => {
             payload: res
           });
         });
+    },
+    getLabelData() {
+      API.label.getAll().then(res => {
+        dispatch({
+          type: 'label/update',
+          payload: res
+        });
+      });
     }
   };
 };
@@ -37,6 +48,7 @@ interface P
 function IndexPage(props: P) {
   React.useEffect(() => {
     props.getIssuseData();
+    props.getLabelData();
   }, []);
   return (
     <Row style={{ maxWidth: 1200, margin: 'auto', padding: 20 }} gutter={20}>
@@ -60,18 +72,18 @@ function IndexPage(props: P) {
           <div>
             <div style={{ marginBottom: 10 }}>标签</div>
             <div>
-              {['magenta', 'red', 'volcano'].map(item => {
+              {props.labels.map((item: LabelType) => {
                 return (
-                  <Tag style={{ marginBottom: 10 }} key={item} color={item}>
-                    {item}
+                  <Tag
+                    style={{ marginBottom: 10, cursor: 'pointer' }}
+                    key={item.id}
+                    color={`#${item.color}`}
+                  >
+                    {item.name}
                   </Tag>
                 );
               })}
             </div>
-            <Divider />
-            右侧
-            <Divider />
-            测试
             <Divider />
             测试
           </div>

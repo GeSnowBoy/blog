@@ -4,8 +4,9 @@ import { RouteComponentProps, Link } from 'react-router-dom';
 import { IssuseType } from '../../model/issuse';
 import API from '../../axios/githubAPI';
 import marked from 'marked';
-import { Skeleton, BackTop, Avatar, Divider } from 'antd';
+import { Skeleton, BackTop, Avatar, Divider, List, Comment } from 'antd';
 import { IconText } from '../../components/blog-cell';
+import { CommentType } from '../../model/comment';
 interface P
   extends RouteComponentProps,
     ReturnType<typeof mapStateToProps>,
@@ -42,8 +43,10 @@ function UserAvatar(props: IssuseType) {
     </div>
   );
 }
+
 function DetailPage(props: P) {
   let [blogData, setBlogData] = React.useState<IssuseType>(props.blogData);
+  let [comments, setComments] = React.useState<CommentType[]>([]);
   let [isLoading, setIsLoading] = React.useState(!blogData);
   React.useEffect(() => {
     if (!blogData || blogData.id != props.id) {
@@ -54,6 +57,10 @@ function DetailPage(props: P) {
           setIsLoading(false);
           setBlogData(res as any);
         });
+      API.comment.get((props.match.params as any).id).then(res => {
+        console.log('行号58:', res);
+        setComments(res as any);
+      });
     }
   }, [props.id]);
   return (
@@ -83,6 +90,24 @@ function DetailPage(props: P) {
             下一篇
           </Link>
         </div>
+        <List
+          dataSource={comments}
+          footer={!!comments.length && <div>共{comments.length}条评论</div>}
+          locale={{ emptyText: <div /> }}
+          renderItem={item => {
+            return (
+              <Comment
+                author={item.user.login}
+                avatar={item.user.avatar_url}
+                content={item.body}
+                datetime={item.created_at
+                  .split('T')
+                  .join(' ')
+                  .replace('Z', '')}
+              />
+            );
+          }}
+        />
       </Skeleton>
     </div>
   );
