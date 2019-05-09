@@ -2,7 +2,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { Pagination, List, BackTop, Row, Col, Affix, Divider, Tag } from 'antd';
 import BlogCell from '../../components/blog-cell';
-import API from '../../axios/githubAPI';
+import API from '../../ajax/githubAPI';
 import { LabelType } from '../../model/label';
 
 const mapStateToProps = state => {

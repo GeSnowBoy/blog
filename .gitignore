@@ -2,3 +2,15 @@
 .cache
 /dist
 /.idea
+
+node_modules
+.history
+# 编译生成文件目录
+
+demo
+.git
+src
+.vscode
+fixture
+cdn.externals.js
+webpack.config.js

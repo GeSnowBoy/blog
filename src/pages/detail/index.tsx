@@ -2,11 +2,12 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { RouteComponentProps, Link } from 'react-router-dom';
 import { IssuseType } from '../../model/issuse';
-import API from '../../axios/githubAPI';
-import marked from 'marked';
+import API from '../../ajax/githubAPI';
+import * as marked from 'marked';
 import { Skeleton, BackTop, Avatar, Divider, List, Comment } from 'antd';
 import { IconText } from '../../components/blog-cell';
 import { CommentType } from '../../model/comment';
+
 interface P
   extends RouteComponentProps,
     ReturnType<typeof mapStateToProps>,
