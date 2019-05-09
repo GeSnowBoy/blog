@@ -1,8 +1,9 @@
 import * as React from 'react';
 import { IssuseType } from '../../model/issuse';
-import { Link } from 'react-router-dom';
+
 import { List, Icon } from 'antd';
 import './index.less';
+import { CustomLink } from '../../components/CustomLink';
 function getImgUrl(src) {
   if (/https?:\/\/.+\.(jpg|png|gif)/.test(src)) {
     return src.match(/https?:\/\/.+\.(jpg|png|gif)/)[0];
@@ -32,12 +33,12 @@ export default function BlogCell(props: IssuseType) {
         <List.Item.Meta
           className="blog-cell-title"
           title={
-            <Link to={`/detail/${props.number}`} target="_blank">
+            <CustomLink to={`/detail/${props.number}`} target="_blank">
               {props.title}
               {!props.locked && (
                 <IconText type="fire" text="" style={{ marginLeft: 8 }} />
               )}
-            </Link>
+            </CustomLink>
           }
           description={props.body.slice(0, 300) + '...'}
         />

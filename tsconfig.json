@@ -11,7 +11,8 @@
     "rootDirs": ["src"],
     "baseUrl": "src",
     "experimentalDecorators": true,
-    "noUnusedLocals": false
+    "noUnusedLocals": false,
+    "allowSyntheticDefaultImports": true
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "build", "scripts", "dist", "public"]

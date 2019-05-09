@@ -1,12 +1,13 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { RouteComponentProps, Link } from 'react-router-dom';
+import { RouteComponentProps } from 'react-router-dom';
 import { IssuseType } from '../../model/issuse';
 import API from '../../ajax/githubAPI';
 import * as marked from 'marked';
 import { Skeleton, BackTop, Avatar, Divider, List, Comment } from 'antd';
 import { IconText } from '../../components/blog-cell';
 import { CommentType } from '../../model/comment';
+import { CustomLink } from '../../components/CustomLink';
 
 interface P
   extends RouteComponentProps,
@@ -85,11 +86,14 @@ function DetailPage(props: P) {
         <Divider dashed />
         <div>
           {parseInt(props.id) > 1 && (
-            <Link to={`${parseInt(props.id) - 1}`}>上一篇</Link>
+            <CustomLink to={`${parseInt(props.id) - 1}`}>上一篇</CustomLink>
           )}
-          <Link to={`${parseInt(props.id) + 1}`} style={{ float: 'right' }}>
+          <CustomLink
+            to={`${parseInt(props.id) + 1}`}
+            style={{ float: 'right' }}
+          >
             下一篇
-          </Link>
+          </CustomLink>
         </div>
         <List
           dataSource={comments}
