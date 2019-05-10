@@ -8,6 +8,7 @@ import { Skeleton, BackTop, Avatar, Divider, List, Comment } from 'antd';
 import { IconText } from '../../components/blog-cell';
 import { CommentType } from '../../model/comment';
 import { CustomLink } from '../../components/CustomLink';
+import MdView from 'components/MdView';
 
 interface P
   extends RouteComponentProps,
@@ -58,6 +59,7 @@ function DetailPage(props: P) {
         .then(res => {
           setIsLoading(false);
           setBlogData(res as any);
+          document.title = (res as any).title;
         });
       API.comment.get((props.match.params as any).id).then(res => {
         console.log('行号58:', res);
@@ -80,7 +82,7 @@ function DetailPage(props: P) {
             <h1>{blogData.title}</h1>
             <UserAvatar {...blogData} />
             <Divider dashed />
-            <div dangerouslySetInnerHTML={{ __html: marked(blogData.body) }} />
+            <MdView md={blogData.body} />
           </div>
         )}
         <Divider dashed />
@@ -104,7 +106,7 @@ function DetailPage(props: P) {
               <Comment
                 author={item.user.login}
                 avatar={item.user.avatar_url}
-                content={item.body}
+                content={<MdView md={item.body} />}
                 datetime={item.created_at
                   .split('T')
                   .join(' ')

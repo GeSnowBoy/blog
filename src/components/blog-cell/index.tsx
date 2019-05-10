@@ -4,6 +4,7 @@ import { IssuseType } from '../../model/issuse';
 import { List, Icon } from 'antd';
 import './index.less';
 import { CustomLink } from '../../components/CustomLink';
+import { getMdInfo } from '../../tools/getMdInfo';
 function getImgUrl(src) {
   if (/https?:\/\/.+\.(jpg|png|gif)/.test(src)) {
     return src.match(/https?:\/\/.+\.(jpg|png|gif)/)[0];
@@ -18,6 +19,7 @@ export const IconText = ({ type, text, style = {} }) => (
 
 export default function BlogCell(props: IssuseType) {
   let imgUrl = getImgUrl(props.body);
+  let mdInfo = getMdInfo(props.body);
   return (
     <List.Item
       key={props.number}
@@ -25,7 +27,7 @@ export default function BlogCell(props: IssuseType) {
       actions={[
         <IconText type="schedule" text={props.created_at.split('T')[0]} />,
         <IconText type="user" text={props.user.login} />,
-        <IconText type="edit" text={props.body.length + '字'} />,
+        <IconText type="edit" text={mdInfo.length + '字'} />,
         <IconText type="message" text={props.comments} />
       ]}
     >
@@ -40,7 +42,7 @@ export default function BlogCell(props: IssuseType) {
               )}
             </CustomLink>
           }
-          description={props.body.slice(0, 300) + '...'}
+          description={mdInfo.introduction}
         />
         {imgUrl && (
           <div className="blog-cell-img">
