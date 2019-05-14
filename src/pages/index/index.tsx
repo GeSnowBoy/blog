@@ -31,10 +31,15 @@ const mapDispatchToProps = dispatch => {
         });
     },
     getLabelData() {
-      API.label.getAll().then(res => {
+      API.V4.getTotalNum().then(res => {
+        console.log('行号35:', res, res.data.repository.labels);
+        let payload = [];
+        try {
+          payload = res.data.repository.labels.nodes || [];
+        } catch (e) {}
         dispatch({
           type: 'label/update',
-          payload: res
+          payload
         });
       });
     }
@@ -79,7 +84,7 @@ function IndexPage(props: P) {
                     key={item.id}
                     color={`#${item.color}`}
                   >
-                    {item.name}
+                    {item.name} ({item.issues.totalCount})
                   </Tag>
                 );
               })}

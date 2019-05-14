@@ -7,4 +7,7 @@ export interface LabelType {
   name: string;
   color: string;
   default: boolean;
+  issues: {
+    totalCount: number;
+  };
 }
