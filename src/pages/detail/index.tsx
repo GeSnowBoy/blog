@@ -4,11 +4,21 @@ import { RouteComponentProps } from 'react-router-dom';
 import { IssuseType } from '../../model/issuse';
 import API from '../../ajax/githubAPI';
 import * as marked from 'marked';
-import { Skeleton, BackTop, Avatar, Divider, List, Comment } from 'antd';
+import {
+  Skeleton,
+  BackTop,
+  Avatar,
+  Divider,
+  List,
+  Comment,
+  Row,
+  Col
+} from 'antd';
 import { IconText } from '../../components/blog-cell';
 import { CommentType } from '../../model/comment';
 import { CustomLink } from '../../components/CustomLink';
 import MdView from 'components/MdView';
+import LinkTree from 'components/LinkTree';
 
 interface P
   extends RouteComponentProps,
@@ -68,7 +78,7 @@ function DetailPage(props: P) {
     }
   }, [props.id]);
   return (
-    <div style={{ maxWidth: 900, margin: 'auto', padding: 20 }}>
+    <div style={{ maxWidth: 1200, margin: 'auto', padding: 20 }}>
       <BackTop />
       <Skeleton
         loading={isLoading}
@@ -78,12 +88,18 @@ function DetailPage(props: P) {
         }}
       >
         {blogData && (
-          <div>
-            <h1>{blogData.title}</h1>
-            <UserAvatar {...blogData} />
-            <Divider dashed />
-            <MdView md={blogData.body} />
-          </div>
+          <Row gutter={50}>
+            <Col span={18}>
+              <h1>{blogData.title}</h1>
+              <UserAvatar {...blogData} />
+              <Divider dashed />
+              <MdView md={blogData.body} />
+            </Col>
+
+            <Col span={6}>
+              <LinkTree md={blogData.body} />
+            </Col>
+          </Row>
         )}
         <Divider dashed />
         <div>

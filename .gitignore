@@ -9,7 +9,7 @@ node_modules
 
 demo
 .git
-src
+
 .vscode
 fixture
 cdn.externals.js
