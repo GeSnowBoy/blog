@@ -11,10 +11,12 @@ import {
   Route,
   RouteComponentProps
 } from 'react-router-dom';
+import BlogHeader from 'components/BlogHeader';
 const App = (
   <Provider store={Store}>
     <Router>
       <React.Suspense fallback={<div>加载中...</div>}>
+        <BlogHeader />
         <Switch>
           <Route
             path="/"
