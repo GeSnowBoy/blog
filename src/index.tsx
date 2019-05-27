@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import Store from './store';
-import 'antd/dist/antd.css';
+
 import './index.less';
 
 import {

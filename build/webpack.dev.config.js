@@ -7,7 +7,8 @@ function resolve(src) {
 }
 module.exports = merge(baseWebpackConfig, {
   entry: {
-    app: resolve('src/index.tsx')
+    app: resolve('src/index.tsx'),
+    css: ['antd/dist/antd.css']
   },
   output: {
     path: resolve('dist'),

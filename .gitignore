@@ -12,5 +12,4 @@ demo
 
 .vscode
 fixture
-cdn.externals.js
-webpack.config.js
+
