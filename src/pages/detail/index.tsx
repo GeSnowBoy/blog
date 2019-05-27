@@ -94,6 +94,40 @@ function DetailPage(props: P) {
               <UserAvatar {...blogData} />
               <Divider dashed />
               <MdView md={blogData.body} />
+              <Divider dashed />
+              <div>
+                {parseInt(props.id) > 1 && (
+                  <CustomLink to={`${parseInt(props.id) - 1}`}>
+                    上一篇
+                  </CustomLink>
+                )}
+                <CustomLink
+                  to={`${parseInt(props.id) + 1}`}
+                  style={{ float: 'right' }}
+                >
+                  下一篇
+                </CustomLink>
+              </div>
+              <List
+                dataSource={comments}
+                footer={
+                  !!comments.length && <div>共{comments.length}条评论</div>
+                }
+                locale={{ emptyText: <div /> }}
+                renderItem={item => {
+                  return (
+                    <Comment
+                      author={item.user.login}
+                      avatar={item.user.avatar_url}
+                      content={<MdView md={item.body} />}
+                      datetime={item.created_at
+                        .split('T')
+                        .join(' ')
+                        .replace('Z', '')}
+                    />
+                  );
+                }}
+              />
             </Col>
 
             <Col span={6}>
@@ -101,36 +135,6 @@ function DetailPage(props: P) {
             </Col>
           </Row>
         )}
-        <Divider dashed />
-        <div>
-          {parseInt(props.id) > 1 && (
-            <CustomLink to={`${parseInt(props.id) - 1}`}>上一篇</CustomLink>
-          )}
-          <CustomLink
-            to={`${parseInt(props.id) + 1}`}
-            style={{ float: 'right' }}
-          >
-            下一篇
-          </CustomLink>
-        </div>
-        <List
-          dataSource={comments}
-          footer={!!comments.length && <div>共{comments.length}条评论</div>}
-          locale={{ emptyText: <div /> }}
-          renderItem={item => {
-            return (
-              <Comment
-                author={item.user.login}
-                avatar={item.user.avatar_url}
-                content={<MdView md={item.body} />}
-                datetime={item.created_at
-                  .split('T')
-                  .join(' ')
-                  .replace('Z', '')}
-              />
-            );
-          }}
-        />
       </Skeleton>
     </div>
   );
