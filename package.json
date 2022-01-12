@@ -35,7 +35,7 @@
     "html-webpack-plugin": "^3.2.0",
     "less": "^3.9.0",
     "less-loader": "^5.0.0",
-    "markdown-it": "^8.4.2",
+    "markdown-it": "^12.3.2",
     "marked": "^0.6.2",
     "mockjs": "^1.0.1-beta3",
     "pygmentize-bundled": "^2.3.0",
